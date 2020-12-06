@@ -16,9 +16,9 @@ import matplotlib.pyplot as plt
 import json
 
 # Define constants
-CASES_FILE = "data/final/cases.json"
-POPULATION_FILE = "data/final/population.json"
-AVERAGE_FILE = "data/final/average.json"
+CASES_FILE = "../data/final/cases.json"
+POPULATION_FILE = "../data/final/population.json"
+AVERAGE_FILE = "../data/final/average.json"
 
 MAX_POPULATION = 3000000
 MIN_POPULATION = 1000
@@ -69,7 +69,7 @@ for region in cases_content:
                 # Label axis and graph
                 plt.xlabel("Date [dd/mm]")
                 plt.ylabel("Establishment of herd immunity [%]")
-                plt.title(f"{real_name_village} - {population} people")
+                plt.title(f"{real_name_village} - {population} citizens")
 
                 # Show graph
                 plt.show()

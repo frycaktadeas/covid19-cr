@@ -14,9 +14,9 @@ import matplotlib.pyplot as plt
 import json
 
 # General constants
-CASES_FILE = "data/final/cases.json"
-POPULATION_FILE = "data/final/population.json"
-OUTPUT_FILE = "data/final/average.json"
+CASES_FILE = "../data/final/cases.json"
+POPULATION_FILE = "../data/final/population.json"
+OUTPUT_FILE = "../data/final/average.json"
 
 # Load files
 with open(CASES_FILE, "r") as file:

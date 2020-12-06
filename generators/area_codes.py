@@ -12,8 +12,8 @@ import json
 import csv
 
 # Define constants
-FILENAME_INPUT = "data/covid19/obec.csv"
-FILENAME_OUTPUT = "data/regions.json"
+FILENAME_INPUT = "../data/covid19/obec.csv"
+FILENAME_OUTPUT = "../data/regions.json"
 
 # Define variables
 dictionary = {}

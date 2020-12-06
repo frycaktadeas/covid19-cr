@@ -14,9 +14,9 @@ import json
 import os
 
 # Define constants
-DIR_INPUT = "data/pohyb19"
-FILENAME_OUTPUT = "data/final/population.json"
-FILENAME_REGIONS = "data/regions.json"
+DIR_INPUT = "../data/pohyb19"
+FILENAME_OUTPUT = "../data/final/population.json"
+FILENAME_REGIONS = "../data/regions.json"
 
 # Define constants for Excel files
 YEAR = "Rok"

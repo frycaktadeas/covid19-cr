@@ -5,8 +5,8 @@ Variables to define:
   - CASES_FILE is cases file
   - POPULATION_FILE is population file
   - AVERAGE_FILE is file with average curve
-  - MAX_POPULATION is max population of village to be selected as anomaly
-  - MIN_POPULATION is min population of village to be selected as anomaly
+  - CATEGORIES - define categories with number of citizens
+  - CATEGORIES - define labels of categories
 
 """
 
@@ -44,8 +44,10 @@ for region in cases_content:
             real_name_village = village.split(" (")[0]
             population = population_content[region][district][real_name_village]
 
+            # Find the correct category
             for num, i in enumerate(CATEGORIES[:-1]):
                 if i < population < CATEGORIES[num+1]:
+                    # If it is not initialised
                     if CATEGORIES_LABELS[num] not in dictionary:
                         dictionary[CATEGORIES_LABELS[num]] = {
                             "x": [],
@@ -53,6 +55,7 @@ for region in cases_content:
                             "count": 0
                         }
 
+                    # Get values
                     x = dictionary[CATEGORIES_LABELS[num]]["x"]
                     y = dictionary[CATEGORIES_LABELS[num]]["y"]
                     dictionary[CATEGORIES_LABELS[num]]["count"] += 1
@@ -70,15 +73,12 @@ for region in cases_content:
                     # Y axis
                     for num2, cases in enumerate(current_cases.values()):
                         # Second, third, ... village
-                        # try:
                         if len(y) == len(current_cases.values()):
-                            y[num2] = (y[num2] + cases / population * 100) / 2
+                            y[num2] = (y[num2] + ((cases / population) * 100)) / 2
 
-                        else:
-                            y.append(cases) # / population * 100)
                         # First village
-                        # except IndexError:
-
+                        else:
+                            y.append((cases / population) * 100)
 
                     break
 
@@ -93,7 +93,16 @@ for num, label in enumerate(dictionary.keys()):
     # Label axis and graph
     plt.xlabel("Date [dd/mm]")
     plt.ylabel("Establishment of herd immunity [%]")
-    plt.title(f"{dictionary[label]['count']} {label} - between {CATEGORIES[num]} and {CATEGORIES[num+1]} people")
+
+    before_text = str(dictionary[label]["count"]) + " "
+    if dictionary[label]["count"] == 1:
+        before_text = ""
+
+    after_text = f"between {CATEGORIES[num]} and {CATEGORIES[num+1]} citizens"
+    if CATEGORIES[num+1] == math.inf:
+        after_text = f"more than {CATEGORIES[num]} citizens"
+
+    plt.title(f"{before_text}{label} - {after_text}")
 
     # Show graph
     plt.show()

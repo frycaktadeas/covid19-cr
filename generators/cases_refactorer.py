@@ -12,8 +12,8 @@ import json
 import csv
 
 # Define constants
-FILENAME_INPUT = "data/covid19/obec.csv"
-FILENAME_OUTPUT = "data/final/cases.json"
+FILENAME_INPUT = "../data/covid19/obec.csv"
+FILENAME_OUTPUT = "../data/final/cases.json"
 
 # Define variables
 refactored = {}
