@@ -63,12 +63,12 @@ for region in cases_content:
                 fig, ax = plt.subplots()
                 ax.plot(average_time_x, difference)
 
-                # Show every 25th information
-                ax.xaxis.set_major_locator(ticker.MultipleLocator(25))
+                # Show every 28th label
+                ax.xaxis.set_major_locator(ticker.MultipleLocator(28))
 
-                # Label axes and graph
+                # Label axis and graph
                 plt.xlabel("Date [dd/mm]")
-                plt.ylabel("Establishment of herd immunity [%] [%]")
+                plt.ylabel("Establishment of herd immunity [%]")
                 plt.title(f"{real_name_village} - {population} people")
 
                 # Show graph

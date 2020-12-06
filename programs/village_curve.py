@@ -48,10 +48,10 @@ for region in cases_content:
                 fig, ax = plt.subplots()
                 ax.plot(time_x, cases_y)
 
-                # Show every 25th information
-                ax.xaxis.set_major_locator(ticker.MultipleLocator(25))
+                # Show every 28th label
+                ax.xaxis.set_major_locator(ticker.MultipleLocator(28))
 
-                # Label axes and graph
+                # Label axis and graph
                 plt.xlabel("Date [dd/mm]")
                 plt.ylabel("Active cases")
                 plt.title(f"{village} - Covid19 active cases")

@@ -37,26 +37,27 @@ for region in cases_content:
         for village in cases_content[region][district]:
             # Get village name without district in brackets
             real_name_village = village.split(" (")[0]
+            population = population_content[region][district][real_name_village]
 
             # Validation
             if real_name_village in population_content[region][district]:
-                # X axe
+                # X axis
                 if not time_x:
-                    # Make time x axe
+                    # Make time x axis
                     for date in cases_content[region][district][village].keys():
                         # time_x.append(date)
                         split_date = date.split("-")
                         time_x.append(f"{split_date[2]}/{split_date[1]}")
 
-                # Y axe
+                # Y axis
                 for num, cases in enumerate(cases_content[region][district][village].values()):
                     # Second, third, ... village
                     try:
-                        cases_y[num] = (cases_y[num] + cases / population_content[region][district][real_name_village] * 100) / 2
+                        cases_y[num] = (cases_y[num] + cases / population * 100) / 2
 
                     # First village
                     except IndexError:
-                        cases_y.append(cases / population_content[region][district][real_name_village] * 100)
+                        cases_y.append(cases / population * 100)
 
             else:
                 print(f"'{village}' not found in region '{region}' in district '{district}'")
@@ -68,10 +69,10 @@ with open(OUTPUT_FILE, "w") as file:
 fig, ax = plt.subplots()
 ax.plot(time_x, cases_y)
 
-# Show every 25th information
-ax.xaxis.set_major_locator(ticker.MultipleLocator(25))
+# Show every 28th label
+ax.xaxis.set_major_locator(ticker.MultipleLocator(28))
 
-# Label axes and graph
+# Label axis and graph
 plt.xlabel("Date [dd/mm]")
 plt.ylabel("Establishment of herd immunity [%]")
 plt.title("CR - Covid19 establishment of herd immunity")
