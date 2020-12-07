@@ -61,7 +61,7 @@ for region in cases_content:
             population = population_content[region][district][real_name_village]
 
             # If this village is selected village
-            if real_name_village.lower() == VILLAGE_NAME.lower():
+            if village.lower() == VILLAGE_NAME.lower() or real_name_village.lower() == VILLAGE_NAME.lower():
                 # Make time x array of values
                 for date in cases_content[region][district][village].keys():
                     split_date = date.split("-")
