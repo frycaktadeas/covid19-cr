@@ -53,11 +53,11 @@ for region in cases_content:
                 for num, cases in enumerate(cases_content[region][district][village].values()):
                     # Second, third, ... village
                     try:
-                        cases_y[num] = (cases_y[num] + cases / population * 100) / 2
+                        cases_y[num] = (cases_y[num] + cases[1] / population * 100) / 2
 
                     # First village
                     except IndexError:
-                        cases_y.append(cases / population * 100)
+                        cases_y.append(cases[1] / population * 100)
 
             else:
                 print(f"'{village}' not found in region '{region}' in district '{district}'")

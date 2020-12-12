@@ -74,11 +74,11 @@ for region in cases_content:
                     for num2, cases in enumerate(current_cases.values()):
                         # Second, third, ... village
                         if len(y) == len(current_cases.values()):
-                            y[num2] = (y[num2] + ((cases / population) * 100)) / 2
+                            y[num2] = (y[num2] + ((cases[1] / population) * 100)) / 2
 
                         # First village
                         else:
-                            y.append((cases / population) * 100)
+                            y.append((cases[1] / population) * 100)
 
                     break
 

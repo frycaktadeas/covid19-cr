@@ -12,8 +12,8 @@ import json
 import csv
 
 # Define constants
-FILENAME_INPUT = "../data/covid19/obec.csv"
-FILENAME_OUTPUT = "../data/final/cases.json"
+FILENAME_INPUT = "../data/covid19/obec_old.csv"
+FILENAME_OUTPUT = "../data/final/cases_old.json"
 
 # Define variables
 refactored = {}
@@ -59,7 +59,7 @@ with open(FILENAME_INPUT, "r") as file:
                 refactored[region][district_code][village] = {}
 
             # Save information to current village and to current date
-            refactored[region][district_code][village][date] = int(get_column(line, 13))
+            refactored[region][district_code][village][date] = [int(get_column(line, 12)), int(get_column(line, 13))]
 
 # Save to output file
 with open(FILENAME_OUTPUT, "w") as file:

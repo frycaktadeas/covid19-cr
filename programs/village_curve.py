@@ -69,8 +69,8 @@ for region in cases_content:
 
                 # Make cases y array of values
                 for cases in cases_content[region][district][village].values():
-                    cases_y.append(cases)
-                    eohi_y.append(cases / population* 100)
+                    cases_y.append(cases[1] )
+                    eohi_y.append(cases[1] / population* 100)
 
                 show_graph(cases_y, "Active cases")
                 show_graph(eohi_y, "Establishment of herd immunity [%]")

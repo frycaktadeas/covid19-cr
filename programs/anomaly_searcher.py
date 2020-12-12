@@ -51,7 +51,7 @@ for region in cases_content:
 
             # Make curve for current village
             for cases in cases_content[region][district][village].values():
-                cases_y.append(cases / population * 100)
+                cases_y.append(cases[1] / population * 100)
 
             # Make difference
             for num, i in enumerate(cases_y):

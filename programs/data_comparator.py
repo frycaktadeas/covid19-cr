@@ -67,7 +67,7 @@ def work(my_old, my_current, thread_number):
     print(f"Thread {thread_number} exited")
 
 
-cores = 4
+cores = 8
 
 one_range = round(len(old) / cores)
 last_range = 0
