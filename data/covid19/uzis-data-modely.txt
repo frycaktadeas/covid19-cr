@@ -5,3 +5,5 @@ https://onemocneni-aktualne.mzcr.cz/api/account/togmRAPLHl1R6toqn4Pq95ikfs/file/
 https://onemocneni-aktualne.mzcr.cz/api/account/togmRAPLHl1R6toqn4Pq95ikfs/file/modely%252Fmodely_05_hospitalizovani_analyza.csv
 https://onemocneni-aktualne.mzcr.cz/api/account/togmRAPLHl1R6toqn4Pq95ikfs/file/dokumentace%252Fmodely%252FCOVID-19-datove-sady-modely.pdf
 https://onemocneni-aktualne.mzcr.cz/api/account/togmRAPLHl1R6toqn4Pq95ikfs/file/dokumentace%252Fmodely%252Fuzemni-celky-ciselniky.xlsx
+
+https://share.uzis.cz/s/dCZBiARJ27ayeoS
