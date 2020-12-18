@@ -12,7 +12,6 @@ import json
 
 # General constants
 OUTPUT_FILE = "data/final/average.json"
-
 cases_content = Covid19().load().data()
 population_content = Population().load().data()
 
@@ -20,7 +19,7 @@ population_content = Population().load().data()
 time_x = []
 cases_y = []
 
-# For every district in region
+# For every district in number
 for district in cases_content:
     # For every village in district
     for village in cases_content[district]:

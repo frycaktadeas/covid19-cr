@@ -14,79 +14,52 @@ import datetime
 import json
 
 # Define constants
-VILLAGE_NAME = "Karviná"
+from library.data import Covid19, Population, Area
+from library.graph import show_graph
 
-CASES_FILE = "data/final/cases.json"
-CASES_FILE_OLD = "data/final/cases_old.json"
-POPULATION_FILE = "data/final/population.json"
+VILLAGE_NAME = "Praha".lower()
 
 # Define variables
+pre = {}
+
 time_x = []
 cases_y = []
-cases_y2 = []
 eohi_y = []
-eohi_y2 = []
 
-# Load cases file
-with open(CASES_FILE, "r") as file:
-    cases_content = json.load(file)
+cases_content = Covid19().load().data(compare=True)
+population_content = Population().load().data()
+area_content = Area().load().data()
 
-with open(CASES_FILE_OLD, "r") as file:
-    cases_content_old = json.load(file)
-
-with open(POPULATION_FILE, "r") as file:
-    population_content = json.load(file)
-
-
-# Functions
-# Functions
-def show_graph(y, y2, label):
-    # Prepare graph
-    current_x = time_x[:264]
-    current_y = y[:264]
-    current_y2 = y2[:264]
-
-    plt.plot(current_x, current_y, color="b", label="Data from 06/12/2020")
-    plt.plot(current_x, current_y2, color="r", label="Data from 19/11/2020")
-
-    # Label axis and graph
-    plt.xlabel("Date [YYYY-mm]")
-    plt.ylabel(label)
-    plt.title(f"{village} - {population} citizens")
-
-    plt.legend()
-
-    plt.gcf().autofmt_xdate()
-    # Show graph and then exit app
-    plt.show()
-
-
-# For every region in cases file
-for region in cases_content:
-    # For every district in region
-    for district in cases_content[region]:
+# For every number in cases file
+for number in range(len(cases_content)):
+    # For every district in number
+    for district in cases_content[number]:
         # For every village in district
-        for village in cases_content[region][district]:
+        for village in cases_content[number][district]:
             # Get village name without district in brackets
-            real_name_village = village.split(" (")[0]
-            population = population_content[region][district][real_name_village]
+            population = population_content[district][village]
+
+            village_name = area_content[village][0]
+            village_name_pure = village_name.split(" (")[0]
 
             # If this village is selected village
-            if village.lower() == VILLAGE_NAME.lower() or real_name_village.lower() == VILLAGE_NAME.lower():
+            if village_name.lower() == VILLAGE_NAME or village_name_pure.lower() == VILLAGE_NAME:
                 # Make time x array of values
-                for date in cases_content[region][district][village].keys():
-                    date_final = datetime.datetime.strptime(date, "%Y-%m-%d")
-                    time_x.append(date_final)
+                time_x.append(list(cases_content[number][district][village].keys()))
+                cases_y.append([])
+                eohi_y.append([])
 
                 # Make cases y array of values
-                for cases in cases_content[region][district][village].values():
-                    cases_y.append(cases[1])
-                    eohi_y.append(cases[1] / population * 100)
+                for cases in cases_content[number][district][village].values():
+                    cases_y[number].append(cases[1])
+                    eohi_y[number].append(cases[1] / population * 100)
 
-                for cases in cases_content_old[region][district][village].values():
-                    cases_y2.append(cases[1])
-                    eohi_y2.append(cases[1] / population * 100)
+                break
 
-                show_graph(cases_y, cases_y2, "Active cases")
-                show_graph(eohi_y, eohi_y2, "Establishment of herd immunity [%]")
-                exit()
+        else:
+            continue
+        break
+
+show_graph(time_x, cases_y, "Active cases", f"Compare data - {VILLAGE_NAME.capitalize()}")
+show_graph(time_x, eohi_y, "Establishment of herd immunity [%]",
+           f"Compare data - {VILLAGE_NAME.capitalize()}")

@@ -70,38 +70,45 @@ class Coordinates(Data):
 
 
 class Covid19(Data):
-    FILE = "data/covid19/obec_old.csv"
+    FILES = ["data/covid19/obec_new.csv", "data/covid19/obec.csv", "data/covid19/obec_old.csv"]
 
     DATE = "datum"
     VILLAGE_CODE = "obec_kod"
+    DISTRICT_CODE = "okres_kod"
     DAILY_CASES = "nove_pripady"
     ACTUAL_CASES = "aktualne_nemocnych"
+
+    def data(self, compare=False):
+        if not self._data:
+            raise ValueError("Generate data at first!")
+
+        if compare:
+            return self._data
+
+        else:
+            return self._data[0]
+
+    def generate(self):
+        self._data = []
+
+        for file in self.FILES:
+            self._data.append(self.generate_inner(file))
+
+        self.dump()
 
     def generate_inner(self, file):
         csv_data = self._read_csv(file)
         current_data = {}
-        # for date, code, daily, cases in zip(
-        #         csv_data[self.DATE],
-        #         csv_data[self.VILLAGE_CODE],
-        #         csv_data[self.DAILY_CASES],
-        #         csv_data[self.ACTUAL_CASES]):
-        #
-        #     if code != 999999:
-        #         if code not in current_data:
-        #             current_data[code] = {}
-        #
-        #         # Save information to current village and to current date
-        #         current_data[code][date] = [daily, cases]
 
         for date, village, district, daily, cases in zip(
                 csv_data[self.DATE],
-                csv_data["obec_kod"],
-                csv_data["okres_kod"],
+                csv_data[self.VILLAGE_CODE],
+                csv_data[self.DISTRICT_CODE],
                 csv_data[self.DAILY_CASES],
                 csv_data[self.ACTUAL_CASES]):
 
             if str(village) != "nan":
-                # if region not in current_data:
+                # if number not in current_data:
                 #     current_data = {}
 
                 if district != "CZ099Y" and village != 999999:
@@ -113,24 +120,7 @@ class Covid19(Data):
 
                     # Save information to current village and to current date
                     current_data[district][village][date] = [daily, cases]
-        # current = [0]
-        # for date, village, district, daily, cases in zip(
-        #         csv_data[self.DATE],
-        #         csv_data["obec_kod"],
-        #         csv_data["okres_kod"],
-        #         csv_data[self.DAILY_CASES],
-        #         csv_data[self.ACTUAL_CASES]):
-        #
-        #     if str(village) != "nan":
-        #         if district != "CZ099Y" and village != 999999:
-        #             if current[len(current)-1] != village:
-        #                 current.append(village)
-        #             if village not in current_data:
-        #                 current_data[village] = {}
-        #
-        #             # Save information to current village and to current date
-        #             current_data[village][date] = [daily, cases]
-        # print(current)
+
         return current_data
 
 

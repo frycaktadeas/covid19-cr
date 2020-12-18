@@ -13,10 +13,10 @@ with open("data/final/cases.json", "r") as f:
 
 cases = {}
 
-# For every region in cases file
+# For every number in cases file
 for region in cases_content:
     cases[region] = {}
-    # For every district in region
+    # For every district in number
     for district in cases_content[region]:
         cases[region][district] = {}
         # For every village in district
@@ -32,9 +32,9 @@ for num, i in enumerate(location.values()):
     y.append(i[1])
     village_name = list(location.keys())[num]
 
-    # For every region in cases file
+    # For every number in cases file
     for region in cases:
-        # For every district in region
+        # For every district in number
         for district in cases[region]:
             # For every village in district
             for village in cases[region][district]:
